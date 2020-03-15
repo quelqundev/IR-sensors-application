@@ -1,0 +1,35 @@
+{
+  "name": "ir-sensors-application",
+  "version": "1.0.0",
+  "description": "Custom application to manage a collection of IR sensors and trigger actions depending on received 433MHz code",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest test.js",
+    "build": "tsc --project tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quelqundev/IR-sensors-application.git"
+  },
+  "keywords": [
+    "ir-sensors",
+    "433"
+  ],
+  "author": "quelqundev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quelqundev/IR-sensors-application/issues"
+  },
+  "homepage": "https://github.com/quelqundev/IR-sensors-application#readme",
+  "dependencies": {
+    "433-utils": "github:baudev/433Utils",
+    "@types/lodash": "^4.14.149",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.0",
+    "jest": "^25.1.0",
+    "typescript": "^3.8.3"
+  }
+}
