@@ -63,7 +63,8 @@
     "./src/class/IRSensor.ts",
     "./src/class/SensorConfig.ts",
     "./src/class/SensorCode.ts",
-    "./src/class/SensorApplication.ts"
+    "./src/class/SensorApplication.ts",
+    "./src/class/SensorDetectionHistory.ts"
   ],
   "exclude": [
     "node_modules"
