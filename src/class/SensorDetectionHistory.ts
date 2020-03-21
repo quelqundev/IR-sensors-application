@@ -1,8 +1,8 @@
 import { IRSensor } from "./IRSensor";
-import { SensorConfig } from "./SensorConfig";
+
 export class SensorDetectionHistory extends Map<string, number> {
-    reset_sensor_history(IRSensors: IRSensor) {
-        this.set(IRSensor.name, 0);
+    reset_sensor_history(sensor: IRSensor) {
+        this.set(sensor.name, 0);
     }
     reset_sensors_history(IRSensor_list: Array<IRSensor>) {
         IRSensor_list.forEach(sensor => {
@@ -10,9 +10,7 @@ export class SensorDetectionHistory extends Map<string, number> {
         });
     }
     reset_all_history() {
-        let IRSensor_list: Array<IRSensor> = [];
-        IRSensor_list = SensorConfig.get_sensors_list_from_configuration();
-        this.reset_sensors_history(IRSensor_list);
+        this.clear();
     }
     increment_history(sensor: IRSensor) {
         let current = this.get(sensor.name);

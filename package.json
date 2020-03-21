@@ -2,10 +2,12 @@
   "name": "ir-sensors-application",
   "version": "1.0.0",
   "description": "Custom application to manage a collection of IR sensors and trigger actions depending on received 433MHz code",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "jest test.js",
-    "build": "tsc --project tsconfig.json"
+    "start": "npm run build && node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --project tsconfig.json",
+    "install": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,9 +29,7 @@
     "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "@types/jest": "^25.1.4",
     "@types/node": "^13.9.0",
-    "jest": "^25.1.0",
     "typescript": "^3.8.3"
   }
 }

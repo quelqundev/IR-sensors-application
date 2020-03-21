@@ -59,12 +59,12 @@
   },
   "files": [
     "src/index.ts",
-    "tests/config.test.ts",
     "./src/class/IRSensor.ts",
     "./src/class/SensorConfig.ts",
     "./src/class/SensorCode.ts",
     "./src/class/SensorApplication.ts",
-    "./src/class/SensorDetectionHistory.ts"
+    "./src/class/SensorDetectionHistory.ts",
+    "./src/class/SensorLowBatteryHistory.ts"
   ],
   "exclude": [
     "node_modules"
