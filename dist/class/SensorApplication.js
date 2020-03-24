@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Receiver_1 = __importDefault(require("433-utils/src/Receiver"));
+const _433_utils_1 = require("433-utils");
 const SensorDetectionHistory_1 = require("./SensorDetectionHistory");
 const SensorLowBatteryHistory_1 = require("./SensorLowBatteryHistory");
 const lodash_1 = __importDefault(require("lodash"));
@@ -15,7 +15,7 @@ const lodash_1 = __importDefault(require("lodash"));
  */
 class SensorApplication {
     constructor(pin, config, notify_users_detection_callback, notify_users_lowbattery_callback, unknowncode_received_callback) {
-        this.receiver = new Receiver_1.default(pin);
+        this.receiver = new _433_utils_1.Receiver(pin);
         console.log("Now listening on PIN " + pin);
         this.config = config;
         console.log(config);

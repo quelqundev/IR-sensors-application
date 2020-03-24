@@ -1,4 +1,4 @@
-import Receiver from "433-utils/src/Receiver";
+import {Receiver} from "433-utils";
 import { SensorCode } from "./SensorCode";
 import { SensorDetectionHistory } from "./SensorDetectionHistory";
 import { SensorLowBatteryHistory } from "./SensorLowBatteryHistory";

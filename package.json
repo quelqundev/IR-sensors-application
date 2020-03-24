@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/quelqundev/IR-sensors-application#readme",
   "dependencies": {
-    "433-utils": "github:baudev/433Utils",
+    "433-utils": "^1.1.1",
     "@types/lodash": "^4.14.149",
     "lodash": "^4.17.15",
     "winston": "^3.2.1"

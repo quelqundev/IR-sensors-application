@@ -8,7 +8,12 @@ import { SensorCode } from './SensorCode';
  * @extends {Array<IRSensor>}
  */
 export declare class SensorConfig extends Array<IRSensor> {
-    constructor(array: Array<IRSensor>);
+    private constructor();
+    /**
+     * SensorConfig factory
+     * @param array array of IRSensor
+     */
+    static create(array: Array<IRSensor>): any;
     /**
      * Return the SensorCode having a corresponding SensorCode into the configuration file or return undefined if none is matching.
      *

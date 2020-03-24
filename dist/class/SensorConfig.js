@@ -13,8 +13,14 @@ const lodash_1 = __importDefault(require("lodash"));
  */
 class SensorConfig extends Array {
     constructor(array) {
-        super();
-        this.concat(array);
+        super(...array);
+    }
+    /**
+     * SensorConfig factory
+     * @param array array of IRSensor
+     */
+    static create(array) {
+        return Object.create(SensorConfig.prototype)(array);
     }
     /**
      * Return the SensorCode having a corresponding SensorCode into the configuration file or return undefined if none is matching.

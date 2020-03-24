@@ -11,11 +11,20 @@ import { SensorCode } from './SensorCode';
  */
 export class SensorConfig extends Array<IRSensor> {
 
-    constructor(array: Array<IRSensor>)
+    private constructor(array: Array<IRSensor>)
     {
-        super();
-        this.concat(array);
+        super(...array);
     }
+
+    /**
+     * SensorConfig factory
+     * @param array array of IRSensor
+     */
+    static create(array: Array<IRSensor>)
+    {
+        return Object.create(SensorConfig.prototype)(array);
+    }
+
     /**
      * Return the SensorCode having a corresponding SensorCode into the configuration file or return undefined if none is matching.
      *
