@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "description": "Custom application to manage a collection of IR sensors and trigger actions depending on received 433MHz code",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "start": "npm run build && node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --project tsconfig.json",
-    "install": "npm run build"
+    "build": "tsc --project tsconfig.json"
   },
   "repository": {
     "type": "git",
