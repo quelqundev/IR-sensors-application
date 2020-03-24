@@ -33,11 +33,11 @@ export class SensorApplication {
     /**
      * Callback executed when detection signal is received
      */
-    notify_users_detection_callback: (sensorapplication: SensorApplication) => void;
+    notify_users_detection_debounced_callback: (sensorapplication: SensorApplication) => void;
     /**
      * Callback executed when low battery signal is received
      */
-    notify_users_lowbattery_callback: (sensorapplication: SensorApplication) => void;
+    notify_users_lowbattery_debounced_callback: (sensorapplication: SensorApplication) => void;
     /**
      * Callback executed on reception of unknown code
      */
@@ -47,7 +47,9 @@ export class SensorApplication {
         pin: number,
         config: SensorConfig,
         notify_users_detection_callback: (sensorapplication: SensorApplication) => void,
+        notify_detection_debounceduration_ms: number,
         notify_users_lowbattery_callback: (sensorapplication: SensorApplication) => void,
+        notify_lowbattery_debounceduration_ms: number,
         unknowncode_received_callback:(code: SensorCode) => void
     ) {
         this.receiver = new Receiver(pin);
@@ -58,13 +60,13 @@ export class SensorApplication {
         this.detection_history.reset_all_history();
         this.lowbattery_history = new SensorLowBatteryHistory();
         this.lowbattery_history.reset_all_history();
-        this.receiver.setOnReceiveListener((data) => {
+        this.receiver.setOnReceiveListener((data: any) => {
             console.debug("Listener received code : " + data);
             let code: SensorCode = data;
             this.on_received_code(code);
         });
-        this.notify_users_detection_callback = notify_users_detection_callback;
-        this.notify_users_lowbattery_callback = notify_users_lowbattery_callback;
+        this.notify_users_detection_debounced_callback = _.debounce(notify_users_detection_callback, notify_detection_debounceduration_ms, { leading: true, trailing:false });
+        this.notify_users_lowbattery_debounced_callback = _.debounce(notify_users_lowbattery_callback, notify_lowbattery_debounceduration_ms, { leading: true, trailing:false });
         this.unknowncode_received_callback = unknowncode_received_callback;
     }
 
@@ -94,14 +96,12 @@ export class SensorApplication {
     on_detection(sensor: IRSensor) {
         console.log("Detection signal of sensor : " + sensor.name);
         this.detection_history.increment_history(sensor);
-        let debounced_notify_users_detection = _.debounce(this.notify_users_detection_callback, 10000, { leading: true });
-        debounced_notify_users_detection(this);
+        this.notify_users_detection_debounced_callback(this);
     }
     on_lowbattery(sensor: IRSensor) {
         console.log("Low Battery signal of sensor : " + sensor.name);
         this.lowbattery_history.increment_history(sensor);
-        let debounced_notify_users_lowbattery = _.debounce(this.notify_users_lowbattery_callback, 3600 * 1000 * 24 * 7, { leading: true });
-        debounced_notify_users_lowbattery(this);
+        this.notify_users_lowbattery_debounced_callback(this);
     }
     on_unknown_code_received(code: SensorCode) {
         console.log("Unknown signal : " + code);

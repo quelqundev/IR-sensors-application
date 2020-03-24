@@ -14,7 +14,7 @@ const lodash_1 = __importDefault(require("lodash"));
  * @class SensorApplication
  */
 class SensorApplication {
-    constructor(pin, config, notify_users_detection_callback, notify_users_lowbattery_callback, unknowncode_received_callback) {
+    constructor(pin, config, notify_users_detection_callback, notify_detection_debounceduration_ms, notify_users_lowbattery_callback, notify_lowbattery_debounceduration_ms, unknowncode_received_callback) {
         this.receiver = new _433_utils_1.Receiver(pin);
         console.log("Now listening on PIN " + pin);
         this.config = config;
@@ -28,8 +28,8 @@ class SensorApplication {
             let code = data;
             this.on_received_code(code);
         });
-        this.notify_users_detection_callback = notify_users_detection_callback;
-        this.notify_users_lowbattery_callback = notify_users_lowbattery_callback;
+        this.notify_users_detection_debounced_callback = lodash_1.default.debounce(notify_users_detection_callback, notify_detection_debounceduration_ms, { leading: true, trailing: false });
+        this.notify_users_lowbattery_debounced_callback = lodash_1.default.debounce(notify_users_lowbattery_callback, notify_lowbattery_debounceduration_ms, { leading: true, trailing: false });
         this.unknowncode_received_callback = unknowncode_received_callback;
     }
     on_received_code(code) {
@@ -57,14 +57,12 @@ class SensorApplication {
     on_detection(sensor) {
         console.log("Detection signal of sensor : " + sensor.name);
         this.detection_history.increment_history(sensor);
-        let debounced_notify_users_detection = lodash_1.default.debounce(this.notify_users_detection_callback, 10000, { leading: true });
-        debounced_notify_users_detection(this);
+        this.notify_users_detection_debounced_callback(this);
     }
     on_lowbattery(sensor) {
         console.log("Low Battery signal of sensor : " + sensor.name);
         this.lowbattery_history.increment_history(sensor);
-        let debounced_notify_users_lowbattery = lodash_1.default.debounce(this.notify_users_lowbattery_callback, 3600 * 1000 * 24 * 7, { leading: true });
-        debounced_notify_users_lowbattery(this);
+        this.notify_users_lowbattery_debounced_callback(this);
     }
     on_unknown_code_received(code) {
         console.log("Unknown signal : " + code);

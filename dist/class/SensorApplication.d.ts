@@ -30,16 +30,16 @@ export declare class SensorApplication {
     /**
      * Callback executed when detection signal is received
      */
-    notify_users_detection_callback: (sensorapplication: SensorApplication) => void;
+    notify_users_detection_debounced_callback: (sensorapplication: SensorApplication) => void;
     /**
      * Callback executed when low battery signal is received
      */
-    notify_users_lowbattery_callback: (sensorapplication: SensorApplication) => void;
+    notify_users_lowbattery_debounced_callback: (sensorapplication: SensorApplication) => void;
     /**
      * Callback executed on reception of unknown code
      */
     unknowncode_received_callback: (code: SensorCode) => void;
-    constructor(pin: number, config: SensorConfig, notify_users_detection_callback: (sensorapplication: SensorApplication) => void, notify_users_lowbattery_callback: (sensorapplication: SensorApplication) => void, unknowncode_received_callback: (code: SensorCode) => void);
+    constructor(pin: number, config: SensorConfig, notify_users_detection_callback: (sensorapplication: SensorApplication) => void, notify_detection_debounceduration_ms: number, notify_users_lowbattery_callback: (sensorapplication: SensorApplication) => void, notify_lowbattery_debounceduration_ms: number, unknowncode_received_callback: (code: SensorCode) => void);
     on_received_code(code: SensorCode): void;
     on_detection(sensor: IRSensor): void;
     on_lowbattery(sensor: IRSensor): void;
