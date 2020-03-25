@@ -13,7 +13,7 @@ export declare class SensorConfig extends Array<IRSensor> {
      * SensorConfig factory
      * @param array array of IRSensor
      */
-    static create(array: Array<IRSensor>): any;
+    static create(array: Array<IRSensor>): SensorConfig;
     /**
      * Return the SensorCode having a corresponding SensorCode into the configuration file or return undefined if none is matching.
      *

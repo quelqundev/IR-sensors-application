@@ -22,7 +22,7 @@ export class SensorConfig extends Array<IRSensor> {
      */
     static create(array: Array<IRSensor>)
     {
-        return Object.create(SensorConfig.prototype)(array);
+        return new SensorConfig(array);
     }
 
     /**
