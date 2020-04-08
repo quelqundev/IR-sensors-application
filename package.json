@@ -1,6 +1,6 @@
 {
   "name": "ir-sensors-application",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Custom application to manage a collection of IR sensors and trigger actions depending on received 433MHz code",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
